@@ -1,11 +1,12 @@
 FROM java:8-jdk
 
-RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
-RUN apt-get install ruby
-RUN gem install bundler
+RUN apt-get update && apt-get install -y wget git curl zip ruby && rm -rf /var/lib/apt/lists/*
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
+
+# Install bundler
+RUN /usr/bin/gem install bundler
 
 # Jenkins is ran with user `jenkins`, uid = 1000
 # If you bind mount a volume from host/volume from a data container, 
