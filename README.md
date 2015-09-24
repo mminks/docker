@@ -1,4 +1,4 @@
-# Official Jenkins Docker image
+# Official Jenkins Docker image with ruby and bundler
 
 The Jenkins Continuous Integration and Delivery server.
 
@@ -8,6 +8,8 @@ http://jenkins-ci.org/
 
 <img src="http://jenkins-ci.org/sites/default/files/jenkins_logo.png"/>
 
+
+This release adds ruby and bundler to the original release.
 
 # Usage
 
