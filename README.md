@@ -11,3 +11,9 @@ This images includes ruby and bundler.
 # How to use this image
 
 Refer to the [official site](https://github.com/jenkinsci/docker) on how to use this image. It's pretty the same.
+
+To make it short:
+
+```
+docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home mminks/jenkins
+```
