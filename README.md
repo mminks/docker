@@ -10,4 +10,4 @@ This images includes ruby and bundler.
 
 # How to use this image
 
-Refer to the [official site]/(https://github.com/jenkinsci/docker) on how to use this image. It's pretty the same.
+Refer to the [official site](https://github.com/jenkinsci/docker) on how to use this image. It's pretty the same.
