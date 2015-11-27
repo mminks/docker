@@ -2,18 +2,18 @@ FROM java:8-jdk
 
 RUN apt-get update && apt-get install -y wget git curl zip ruby && rm -rf /var/lib/apt/lists/*
 
-ENV JENKINS_HOME /var/jenkins_home
-ENV JENKINS_SLAVE_AGENT_PORT 50000
-
 # Install bundler
 RUN /usr/bin/gem install bundler
 
-# Jenkins is ran with user `jenkins`, uid = 1000
-# If you bind mount a volume from host/volume from a data container, 
-# ensure you use same uid
+ENV JENKINS_HOME /var/jenkins_home
+ENV JENKINS_SLAVE_AGENT_PORT 50000
+
+# Jenkins is run with user `jenkins`, uid = 1000
+# If you bind mount a volume from the host or a data container, 
+# ensure you use the same uid
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
-# Jenkins home directoy is a volume, so configuration and build history 
+# Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
 VOLUME /var/jenkins_home
 
@@ -30,8 +30,9 @@ RUN curl -fL https://github.com/krallin/tini/releases/download/v0.5.0/tini-stati
 
 COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
-ENV JENKINS_VERSION 1.609.3
-ENV JENKINS_SHA f5ad5f749c759da7e1a18b96be5db974f126b71e
+ENV JENKINS_VERSION 1.625.2
+ENV JENKINS_SHA 395fe6975cf75d93d9fafdafe96d9aab1996233b
+
 
 # could use ADD but this one does not check Last-Modified header 
 # see https://github.com/docker/docker/issues/8331
@@ -54,5 +55,5 @@ USER jenkins
 COPY jenkins.sh /usr/local/bin/jenkins.sh
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
-# from a derived Dockerfile, can use `RUN plugin.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
