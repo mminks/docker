@@ -1,6 +1,6 @@
 FROM java:8-jdk
 
-RUN apt-get update && apt-get install -y wget git curl zip ruby && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget git curl zip ruby cron && rm -rf /var/lib/apt/lists/*
 
 # Install bundler
 RUN /usr/bin/gem install bundler
