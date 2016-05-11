@@ -6,7 +6,7 @@ This images includes ruby and bundler.
 
 # Jenkins version
 
-1.642.2 LTS
+1.651.1 LTS
 
 # How to use this image
 
