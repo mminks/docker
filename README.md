@@ -15,5 +15,5 @@ Refer to the [official site](https://github.com/jenkinsci/docker) on how to use 
 To make it short:
 
 ```
-docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home mminks/jenkins
+docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home mminks/docker-jenkins
 ```
