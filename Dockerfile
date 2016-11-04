@@ -1,7 +1,7 @@
 FROM java:8-jdk
 
-ENV JENKINS_VERSION 2.19.1
-ENV JENKINS_SHA dc28b91e553c1cd42cc30bd75d0f651671e6de0b
+ENV JENKINS_VERSION 2.19.2
+ENV JENKINS_SHA 32b8bd1a86d6d4a91889bd38fb665db4090db081
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
@@ -13,7 +13,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 ENV TZ=Europe/Berlin
 
 RUN apt-get update && \
-    apt-get install -y wget git curl zip ruby cron sudo && \
+    apt-get install -y wget git curl zip ruby cron sudo qemu-kvm cpu-checker file && \
     apt-get autoremove --purge && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -26,6 +26,11 @@ RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
+
+RUN addgroup kvm
+RUN usermod -a -G kvm jenkins
+RUN chgrp kvm /dev/kvm
+COPY 60-qemu-kvm.rules /etc/udev/rules.d/60-qemu-kvm.rules
 
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
