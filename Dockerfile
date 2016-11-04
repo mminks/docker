@@ -13,7 +13,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 ENV TZ=Europe/Berlin
 
 RUN apt-get update && \
-    apt-get install -y wget git curl zip ruby cron sudo qemu-kvm cpu-checker file && \
+    apt-get install -y wget git curl zip ruby cron sudo qemu-kvm file && \
     apt-get autoremove --purge && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
