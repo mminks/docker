@@ -28,7 +28,6 @@ RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
 RUN usermod -a -G kvm jenkins
-RUN chgrp kvm /dev/kvm
 COPY 60-qemu-kvm.rules /etc/udev/rules.d/60-qemu-kvm.rules
 
 # Jenkins home directory is a volume, so configuration and build history
