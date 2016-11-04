@@ -27,7 +27,6 @@ RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
 # ensure you use the same uid
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
-RUN addgroup kvm
 RUN usermod -a -G kvm jenkins
 RUN chgrp kvm /dev/kvm
 COPY 60-qemu-kvm.rules /etc/udev/rules.d/60-qemu-kvm.rules
