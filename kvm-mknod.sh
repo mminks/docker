@@ -6,13 +6,13 @@ set -e
 
 lsmod | grep '\<kvm\>' > /dev/null || {
   echo >&2 "KVM module not loaded; software emulation will be used"
-  # exit 1
+  exit 1
 }
 
-mknod /dev/kvm c 10 $(grep '\<kvm\>' /proc/misc | cut -f 1 -d' ') || {
+sudo mknod /dev/kvm c 10 $(grep '\<kvm\>' /proc/misc | cut -f 1 -d' ') || {
   echo >&2 "Unable to make /dev/kvm node; software emulation will be used"
   echo >&2 "(This can happen if the container is run without -privileged)"
-  # exit 1
+  exit 1
 }
 
 dd if=/dev/kvm count=0 2>/dev/null || {
@@ -21,5 +21,5 @@ dd if=/dev/kvm count=0 2>/dev/null || {
 }
 
 # authorize the kvm group to use KVM
-chown root:kvm /dev/kvm
-chmod g+w /dev/kvm
+sudo chown root:kvm /dev/kvm
+sudo chmod g+w /dev/kvm

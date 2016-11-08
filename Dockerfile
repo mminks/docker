@@ -63,6 +63,8 @@ USER jenkins
 COPY jenkins.sh /usr/local/bin/jenkins.sh
 COPY kvm-mknod.sh /usr/local/bin/kvm-mknod.sh
 
+COPY jenkins.sudoers /etc/sudoers.d/jenkins
+
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 
