@@ -27,9 +27,6 @@ RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
 # ensure you use the same uid
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
-RUN usermod -a -G kvm jenkins
-COPY 60-qemu-kvm.rules /etc/udev/rules.d/60-qemu-kvm.rules
-
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
 VOLUME /var/jenkins_home
@@ -61,7 +58,6 @@ EXPOSE 50000
 USER jenkins
 
 COPY jenkins.sh /usr/local/bin/jenkins.sh
-COPY kvm-mknod.sh /usr/local/bin/kvm-mknod.sh
 
 COPY jenkins.sudoers /etc/sudoers.d/jenkins
 
