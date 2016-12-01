@@ -1,7 +1,7 @@
 FROM java:8-jdk
 
-ENV JENKINS_VERSION 2.19.2
-ENV JENKINS_SHA 32b8bd1a86d6d4a91889bd38fb665db4090db081
+ENV JENKINS_VERSION 2.19.4
+ENV JENKINS_SHA ea61a4ff86f0db715511d1118a4e2f0a6a0311a1
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
@@ -13,7 +13,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 ENV TZ=Europe/Berlin
 
 RUN apt-get update && \
-    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo qemu-kvm file kmod && \
+    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 && \
     apt-get autoremove --purge && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
