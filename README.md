@@ -6,7 +6,7 @@ This images includes ruby and bundler.
 
 # Jenkins version
 
-2.19.4 LTS
+2.32.1 LTS
 
 # How to use this image
 
@@ -15,5 +15,5 @@ Refer to the [official site](https://github.com/jenkinsci/docker) on how to use 
 To make it short:
 
 ```
-docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home mminks/docker-jenkins
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home mminks/docker-jenkins
 ```
