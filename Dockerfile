@@ -13,7 +13,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 ENV TZ=Europe/Berlin
 
 RUN apt-get update && \
-    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 && \
+    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 && \
     apt-get autoremove --purge && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
