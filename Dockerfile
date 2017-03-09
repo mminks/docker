@@ -1,7 +1,7 @@
 FROM java:8-jdk
 
-ENV JENKINS_VERSION 2.32.2
-ENV JENKINS_SHA f495a08733f69b1845fd2d9b3a46482adb6e6cee
+ENV JENKINS_VERSION 2.32.3
+ENV JENKINS_SHA a25b9a314ca9e76f9673da7309e1882e32674223
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
@@ -12,8 +12,11 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
 ENV TZ=Europe/Berlin
 
+# This method has been verified with the Trusty sources in Debian Jessie and Stretch but may not be supported in earlier versions.
+RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list
+
 RUN apt-get update && \
-    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 && \
+    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible && \
     apt-get autoremove --purge && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
