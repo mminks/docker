@@ -14,6 +14,7 @@ ENV TZ=Europe/Berlin
 
 # This method has been verified with the Trusty sources in Debian Jessie and Stretch but may not be supported in earlier versions.
 RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 RUN apt-get update && \
     apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible && \
