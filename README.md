@@ -2,11 +2,11 @@
 
 This is a fork of the Git repo of the Docker [official image](https://docs.docker.com/docker-hub/official_repos/) for [jenkins](hhttps://hub.docker.com/_/jenkins/).
 
-This images includes ruby and bundler.
+**Note:** This images includes ruby and bundler.
 
 # Jenkins version
 
-2.32.3 LTS
+2.46.1 LTS
 
 # How to use this image
 
