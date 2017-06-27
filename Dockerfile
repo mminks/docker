@@ -1,6 +1,6 @@
 FROM java:8-jdk
 
-ENV JENKINS_VERSION 2.60.0
+ENV JENKINS_VERSION 2.60.1
 ENV JENKINS_SHA 1ab1c60b4659e709b2419817a20b2749e6bf29e5
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
@@ -18,11 +18,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible && \
+    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible jq && \
     apt-get autoremove --purge -y && apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN /usr/bin/gem install bundler
+
+RUN wget $(curl -Ls curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*64" | sort -r | head -1 | awk -F[\"] '{print $4}') -O /tmp/terraform.zip
+RUN unzip /tmp/terraform.zip -d /usr/local/bin
 
 RUN echo $TZ | sudo tee /etc/timezone
 RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
