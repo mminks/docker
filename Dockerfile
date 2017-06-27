@@ -24,8 +24,8 @@ RUN apt-get update && \
 
 RUN /usr/bin/gem install bundler
 
-RUN "wget $(curl -Ls curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep \"linux.*64\" | sort -r | head -1 | awk -F[\"] '{print $4}') -O /tmp/terraform.zip"
-RUN unzip /tmp/terraform.zip -d /usr/local/bin
+# RUN "wget $(curl -Ls curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep \"linux.*64\" | sort -r | head -1 | awk -F[\"] '{print $4}') -O /tmp/terraform.zip"
+# RUN unzip /tmp/terraform.zip -d /usr/local/bin
 
 RUN echo $TZ | sudo tee /etc/timezone
 RUN sudo dpkg-reconfigure --frontend noninteractive tzdata
