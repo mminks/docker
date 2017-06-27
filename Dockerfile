@@ -1,7 +1,7 @@
 FROM java:8-jdk
 
-ENV JENKINS_VERSION 2.46.2
-ENV JENKINS_SHA b91fa09838342980f56224adcf5f02edf668d834
+ENV JENKINS_VERSION 2.60.0
+ENV JENKINS_SHA 1ab1c60b4659e709b2419817a20b2749e6bf29e5
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 ENV JENKINS_UC https://updates.jenkins-ci.org
@@ -17,8 +17,9 @@ RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /et
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 RUN apt-get update && \
+    apt-get dist-upgrade -y && \
     apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible && \
-    apt-get autoremove --purge && apt-get autoclean && \
+    apt-get autoremove --purge -y && apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN /usr/bin/gem install bundler
