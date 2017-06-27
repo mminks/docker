@@ -1,4 +1,4 @@
-FROM java:8-jdk
+FROM openjdk:8-jdk
 
 ENV JENKINS_VERSION 2.60.1
 ENV JENKINS_SHA 1ab1c60b4659e709b2419817a20b2749e6bf29e5
@@ -24,7 +24,7 @@ RUN apt-get update && \
 
 RUN /usr/bin/gem install bundler
 
-RUN wget $(curl -Ls curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*64" | sort -r | head -1 | awk -F[\"] '{print $4}') -O /tmp/terraform.zip
+RUN "wget $(curl -Ls curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep \"linux.*64\" | sort -r | head -1 | awk -F[\"] '{print $4}') -O /tmp/terraform.zip"
 RUN unzip /tmp/terraform.zip -d /usr/local/bin
 
 RUN echo $TZ | sudo tee /etc/timezone
