@@ -6,7 +6,7 @@ This is a fork of the Git repo of the Docker [official image](https://docs.docke
 
 # Jenkins version
 
-2.60.2 LTS
+2.60.3 LTS
 
 # How to use this image
 
