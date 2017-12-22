@@ -18,11 +18,13 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible jq && \
+    apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo lib32gcc1 mesa-utils libqt5quick5 libqt5widgets5 ansible jq python-pip && \
     apt-get autoremove --purge -y && apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN /usr/bin/gem install bundler
+
+RUN pip install awscli --upgrade --user
 
 RUN wget $(curl -Ls https://releases.hashicorp.com/index.json | jq '{terraform}' | grep url | egrep linux_amd64 | sort -V | tail -n1 | awk '{print $2}' | sed 's/"*,*//g') -O /tmp/terraform.zip
 RUN unzip /tmp/terraform.zip -d /usr/local/bin
