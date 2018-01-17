@@ -13,8 +13,14 @@ ENV TZ=Europe/Berlin
 RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 \
     && apt-get update \
+    && apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common \
+    && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - \
+    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" \
+    && apt-get update \
     && apt-get dist-upgrade -y \
-    && apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo ansible jq python-pip \
+    && apt-get install -y wget git curl zip ruby ruby-dev make gcc cron sudo ansible jq python-pip docker-ce \
+    && systemctl disable docker \
+    && echo manual | tee /etc/init/docker.override \
     && apt-get autoremove --purge -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
