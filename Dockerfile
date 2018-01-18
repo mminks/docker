@@ -40,7 +40,9 @@ RUN wget "https://storage.googleapis.com/kubernetes-release/release/$(curl -s ht
     && chmod +x /usr/local/bin/kubectl \
     && pip install awscli --upgrade --user \
     && wget $(curl -Ls https://releases.hashicorp.com/index.json | jq '{terraform}' | grep url | egrep linux_amd64 | sort -V | tail -n1 | awk '{print $2}' | sed 's/"*,*//g') -O /tmp/terraform.zip \
-    && unzip /tmp/terraform.zip -d /usr/local/bin
+    && unzip /tmp/terraform.zip -d /usr/local/bin \
+    && curl -s -L -o /usr/local/bin/docker-compose $(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r ".assets[] | select(.name | test(\"$(uname -s)-$(uname -m)\")) | .browser_download_url" | head -n1) \
+    && chmod +x /usr/local/bin/docker-compose
 
 VOLUME /var/jenkins_home
 
