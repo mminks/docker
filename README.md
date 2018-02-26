@@ -2,7 +2,15 @@
 
 This is a fork of the Git repo of the Docker [official image](https://docs.docker.com/docker-hub/official_repos/) for [jenkins](hhttps://hub.docker.com/_/jenkins/).
 
-**Note:** This images includes ruby and bundler.
+# Additional packages
+
+This images includes:
+
+* Ruby
+* Bundler
+* AWS CLI
+* Terraform
+* Docker (client) and Docker Compose
 
 # Jenkins version
 
