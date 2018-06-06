@@ -14,7 +14,7 @@ This images includes:
 
 # Jenkins version
 
-2.107.2 LTS
+2.107.3 LTS
 
 # How to use this image
 
